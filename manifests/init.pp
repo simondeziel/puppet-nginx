@@ -1,7 +1,7 @@
 #
 class nginx (
   Enum['core','full','extras','light'] $flavor = 'core',
-  Bool $default_disable                        = true,
+  Boolean $default_disable                     = true,
 ) {
   # XXX: workaround https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=788573
   if $::lsbdistrelease == '14.04' {
