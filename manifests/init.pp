@@ -3,6 +3,10 @@ class nginx (
   Enum['core','full','extras','light'] $flavor = 'core',
   Boolean $disable_default                     = true,
 ) {
+  package { "nginx-${flavor}":
+    ensure => installed,
+  }
+
   # XXX: workaround https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=788573
   if $::lsbdistrelease == '14.04' {
     file { '/etc/init.d/nginx':
