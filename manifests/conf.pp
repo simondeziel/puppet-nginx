@@ -9,7 +9,7 @@ define nginx::conf (
   Optional[String] $source         = undef,
   Enum[
        'reload','restart',
-       'configtest','upgrade',
+       'configtest','upgrade'
       ] $service_action            = 'upgrade',
 ) {
   if $source and $content {
