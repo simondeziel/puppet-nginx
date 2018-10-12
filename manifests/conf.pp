@@ -11,6 +11,9 @@ define nginx::conf (
        'reload','restart',
        'configtest','upgrade'
       ] $service_action            = 'upgrade',
+  Optional[String] $owner          = undef,
+  Optional[String] $group          = undef,
+  Optional[String] $mode           = '0644',
 ) {
   if $source and $content {
     fail("${module_name} source and content cannot be use at the same time")
@@ -25,6 +28,9 @@ define nginx::conf (
     ensure  => $ensure,
     content => $content,
     source  => $source,
+    owner   => $owner,
+    group   => $group,
+    mode    => $mode,
     notify  => Exec["service nginx ${service_action}"],
     # XXX: "before" is required to prevent a race when a site starts referencing a
     #      new conf file. If the site change is deployed first, it will trigger a
